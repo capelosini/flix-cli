@@ -1,9 +1,6 @@
 from bs4 import BeautifulSoup
-import colorama
 import requests
 from colorama import Fore, Style
-import webbrowser
-import vlc
 from selenium import webdriver
 import time
 
@@ -54,14 +51,3 @@ b.get(BeautifulSoup(b.page_source, "html.parser").find("video")["src"])
 
 print(Fore.MAGENTA+"\nGood Movie! ;)\n")
 
-#webbrowser.open_new(soup.find("iframe")["src"])
-
-
-# # creating vlc media player object
-# media = vlc.MediaPlayer(str(soup.find("iframe")["src"]))
-
-# # start playing video
-# media.play()
-
-# while True:
-#     pass
