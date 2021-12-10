@@ -13,4 +13,4 @@
 <h4><code>play</code>: Play the movie</h4>
 <h4><code>pause</code>: Pause the movie</h4>
 <h4><code>quit</code>: Quit of program</h4>
-<h4><code>time <SOME TIME IN SECONDS></code>: Set the movie time in seconds</h4>
+<h4><code>time $$TIME$$</code>: Set the movie time in seconds</h4>
