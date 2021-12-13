@@ -3,7 +3,7 @@ import requests
 from colorama import Fore, Style, Back
 from selenium import webdriver
 import time
-import vlc
+# import vlc
 
 q=input("\nEnter the movie name: ")
 
@@ -43,43 +43,48 @@ except:
 r=s.get(movie["url"])
 soup=BeautifulSoup(r.text, "html.parser")
 
-b=webdriver.Firefox(executable_path="./geckodriver")
-b.minimize_window()
+s=webdriver.firefox.service.Service("./geckodriver")
+b=webdriver.Firefox(service=s)
 b.get(soup.find("iframe")["src"])
 
-time.sleep(6)
+time.sleep(5)
 
 movieURL=BeautifulSoup(b.page_source, "html.parser").find("video")["src"]
 
-b.close()
+b.get(movieURL)
 
-Instance = vlc.Instance()
-player = Instance.media_player_new()
-Media = Instance.media_new(movieURL)
-Media.get_mrl()
-player.set_media(Media)
-player.play()
+b.fullscreen_window()
 
-print(Fore.LIGHTYELLOW_EX+f"\nDownload URL: {movieURL}\n")
-print("\n"+str(player.get_length()/1000)+" Seconds")
 print(Fore.MAGENTA+"\nGood Movie! ;)\n")
 
-while True:
-    try:
-        command=input(">> ")
-        if command == "pause":
-            player.pause()
-            print(str(player.get_time()/1000)+" - "+str(player.get_length()/1000))
-        elif command == "play":
-            player.play()
-            print(str(player.get_time()/1000)+" - "+str(player.get_length()/1000))
-        elif command.split()[0] == "time":
-            player.set_time(int(command.split()[1])*1000)
-            print(str(player.get_time()/1000)+" - "+str(player.get_length()/1000))
-        elif command == "quit":
-            break
-    except:
-        pass
+# b.close()
+
+# Instance = vlc.Instance()
+# player = Instance.media_player_new()
+# Media = Instance.media_new(movieURL)
+# Media.get_mrl()
+# player.set_media(Media)
+# player.play()
+
+# print(Fore.LIGHTYELLOW_EX+f"\nDownload URL: {movieURL}\n")
+# print("\n"+str(player.get_length()/1000)+" Seconds")
+
+# while True:
+#     try:
+#         command=input(">> ")
+#         if command == "pause":
+#             player.pause()
+#             print(str(player.get_time()/1000)+" - "+str(player.get_length()/1000))
+#         elif command == "play":
+#             player.play()
+#             print(str(player.get_time()/1000)+" - "+str(player.get_length()/1000))
+#         elif command.split()[0] == "time":
+#             player.set_time(int(command.split()[1])*1000)
+#             print(str(player.get_time()/1000)+" - "+str(player.get_length()/1000))
+#         elif command == "quit":
+#             break
+#     except:
+#         pass
 
 
-print(Fore.CYAN+"\nBye!")
+# print(Fore.CYAN+"\nBye!")
